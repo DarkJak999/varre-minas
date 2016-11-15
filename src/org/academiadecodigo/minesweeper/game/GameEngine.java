@@ -205,39 +205,40 @@ public class GameEngine {
 
 
     /**
-     *
-     * @param x
-     * @param y
+     *This expands the cell selected and the cells right next to it until they bump into a number
+     * @param row
+     * @param col
      */
 
-    public void expandCell(int x, int y) {
+    public void expandCell(int row, int col) {
         int minx, miny, maxx, maxy;
 
-        minx = (x <= 0 ? 0 : x - 1);
-        miny = (y <= 0 ? 0 : y - 1);
-        maxx = (x >= gridRows - 1 ? gridRows : x + 3);
-        maxy = (y >= gridCols - 1 ? gridCols : y + 3);
+        minx = (row <= 0 ? 0 : row - 1);
+        miny = (col <= 0 ? 0 : col - 1);
+        maxx = (row >= gridRows - 1 ? gridRows : row + 3);
+        maxy = (col >= gridCols - 1 ? gridCols : col + 3);
 
-        if(gameMatrix[x][y] > 0){
-            expanded[x][y] = true;
+        if(row == 0 || row == gridRows+1 || col == 0 || col == gridCols+1)
+            return;
+
+        if(gameMatrix[row][col] > 0){
+            expanded[row][col] = true;
             return;
         }
 
-        for (int r = minx; r < maxx; r++) {
-            for (int c = miny; c < maxy; c++) {
-                if (!expanded[r][c] && gameMatrix[r][c] == 0) {
-                    //if (gameMatrix[r][c] == 0) {
-                        expanded[r][c] = true;
-                        expandCell(r, c);
-                    /*} else if(gameMatrix[r][c] > 0){
-                        expanded[r][c] = true;
-                        return;
-                    }*/
-                }else if(gameMatrix[r][c] > 0 && !expanded[r][c]){
-                    return;
-                }
-            }
+        //check a cell for expansion status
+        //if it can be expanded, expand it and move to the adjacent cells via recursion
+
+        if(gameMatrix[row][col] == 0 && !expanded[row][col]){
+            expanded[row][col] = true;
+
+            //check adjacent cells
+            for (int rr = row - 1; rr <= row + 1; rr++)
+                for (int cc = col - 1; cc <= col + 1; cc++)
+                    expandCell(rr, cc);
         }
+        else
+            return;
     }
 }
 
