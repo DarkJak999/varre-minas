@@ -2,6 +2,7 @@ package org.academiadecodigo.minesweeper.game;
 
 import org.academiadecodigo.minesweeper.Difficulty;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -9,37 +10,56 @@ import java.util.Scanner;
  */
 public class GameEngine {
 
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
+
     private static final int PROB = 90;
     private int gridRows;
     private int gridCols;
     private int numBombs;
-    private int bombsBlown;
+    private boolean bombBlown;
     private int[][] gameMatrix;
     private boolean[][] expanded;
+
+
+    /**
+     * This calls all the functions that initialize the game matrix and all the variables that will influence the game
+     */
+    public void init() {
+        chooseDifficulty(Difficulty.BEGINNER);
+        placeBombs();
+        calculateAdjacent();
+    }
 
     public void start() {
 
         int row, col;
         Scanner input = new Scanner(System.in);
 
-        chooseDifficulty(Difficulty.BEGINNER);
+        init();
 
-        placeBombs();
-        calculateAdjacent();
-        printMatrix();
-        //printBombsOnly();
+        while (true) {
 
-        System.out.println();
+            clearScreen();
 
-        //expandMatrix();
+            printGameMatrix();
+            System.out.println();
 
-        System.out.println("make a move (row, col)");
-        row = input.nextInt();
-        col = input.nextInt();
+            System.out.println("make a move (row, col)");
+            row = input.nextInt();
+            col = input.nextInt();
 
-        checkMove(row, col);
+            checkMove(row, col);
 
-        printGameMatrix();
+            if (checkGameConditions()) {
+                clearScreen();
+                printGameMatrix();
+                break;
+            }
+        }
+
+        System.out.println("Game Over");
 
     }
 
@@ -71,7 +91,7 @@ public class GameEngine {
         //when we check the adjacent cells for other bombs and update the solution
         gameMatrix = new int[gridRows + 2][gridCols + 2];
         expanded = new boolean[gridRows + 2][gridCols + 2];
-        bombsBlown = 0;
+        bombBlown = false;
 
 
     }
@@ -121,7 +141,11 @@ public class GameEngine {
                         }
     }
 
-    public void printBombsOnly(){
+    /**
+     * Debug printing method that only shows where the bombs are
+     */
+
+    public void printBombsOnly() {
 
         for (int r = 1; r <= gridRows; r++) {
             for (int c = 1; c <= gridCols; c++) {
@@ -155,14 +179,27 @@ public class GameEngine {
         }
     }
 
+    /**
+     * Print function that prints the game matrix as the game plays out, only showing the values of cells that were expanded already
+     */
+
     public void printGameMatrix() {
 
+        System.out.print("   ");
+        for (int i = 1; i <= gridRows; i++)
+            System.out.print(" " + i + " ");
+
+        System.out.println();
+
         for (int r = 1; r <= gridRows; r++) {
+            System.out.print(" " + r + " ");
             for (int c = 1; c <= gridCols; c++) {
                 if (gameMatrix[r][c] == 0 && expanded[r][c])
-                    System.out.print("[e]");
+                    System.out.print("[" +ANSI_YELLOW + "e" + ANSI_RESET + "]");
                 else if (gameMatrix[r][c] > 0 && expanded[r][c])
                     System.out.print("[" + gameMatrix[r][c] + "]");
+                else if (gameMatrix[r][c] == -1 && expanded[r][c])
+                    System.out.print(ANSI_RED + "[*]" + ANSI_RESET);
                 else
                     System.out.print("[ ]");
             }
@@ -186,6 +223,50 @@ public class GameEngine {
     }
 
     /**
+     * This clears the screen in order to only show one grid at each time
+     */
+
+    public void clearScreen() {
+        for (int i = 0; i < 15; i++) {
+            System.out.println();
+        }
+    }
+
+    /**
+     * Checks the game conditions to see if the game is over and if the player either lost or won the game
+     *
+     * @return
+     */
+    public boolean checkGameConditions() {
+
+        if (bombBlown)
+            return true;
+
+        if (numBombs == checkForBombs())
+            return true;
+
+        return false;
+    }
+
+    /**
+     * This checks if the player found all the bombs
+     *
+     * @return
+     */
+
+    public int checkForBombs() {
+
+        int count = 0;
+
+        for (int r = 1; r <= gridRows; r++)
+            for (int c = 1; c <= gridCols; c++)
+                if (expanded[r][c] == false)
+                    count++;
+
+        return count;
+    }
+
+    /**
      * This checks if the position that was inserted is a bomb. If not, it will expand the nodes until they bump into a bomb, stopping the expansion
      *
      * @param row
@@ -196,8 +277,8 @@ public class GameEngine {
         if (gameMatrix[row][col] == -1) {
             System.out.println("bomb hit");
             expanded[row][col] = true;
-            bombsBlown++;
-        } else{
+            bombBlown = true;
+        } else {
             expandCell(row, col);
         }
 
@@ -205,17 +286,20 @@ public class GameEngine {
 
 
     /**
-     *This expands the cell selected and the cells right next to it until they bump into a number
+     * This expands the cell selected and the cells right next to it until they bump into a number
+     *
      * @param row
      * @param col
      */
 
     public void expandCell(int row, int col) {
 
-        if(row == 0 || row == gridRows+1 || col == 0 || col == gridCols+1)
+        //if it reaches the bounderies of the board, there's no need to check
+        if (row == 0 || row == gridRows + 1 || col == 0 || col == gridCols + 1)
             return;
 
-        if(gameMatrix[row][col] > 0){
+        //stopping condition - if we reach a cell that's adjacent to a bomb, we don't need to expand anymore
+        if (gameMatrix[row][col] > 0) {
             expanded[row][col] = true;
             return;
         }
@@ -223,10 +307,10 @@ public class GameEngine {
         //check a cell for expansion status
         //if it can be expanded, expand it and move to the adjacent cells via recursion
 
-        if(gameMatrix[row][col] == 0 && !expanded[row][col]){
+        if (gameMatrix[row][col] == 0 && !expanded[row][col]) {
             expanded[row][col] = true;
 
-            //check adjacent cells
+            //check adjacent cells in a 3x3 sub-matrix
             for (int rr = row - 1; rr <= row + 1; rr++)
                 for (int cc = col - 1; cc <= col + 1; cc++)
                     expandCell(rr, cc);
