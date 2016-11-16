@@ -211,12 +211,6 @@ public class GameEngine {
      */
 
     public void expandCell(int row, int col) {
-        int minx, miny, maxx, maxy;
-
-        minx = (row <= 0 ? 0 : row - 1);
-        miny = (col <= 0 ? 0 : col - 1);
-        maxx = (row >= gridRows - 1 ? gridRows : row + 3);
-        maxy = (col >= gridCols - 1 ? gridCols : col + 3);
 
         if(row == 0 || row == gridRows+1 || col == 0 || col == gridCols+1)
             return;
@@ -237,8 +231,6 @@ public class GameEngine {
                 for (int cc = col - 1; cc <= col + 1; cc++)
                     expandCell(rr, cc);
         }
-        else
-            return;
     }
 }
 
