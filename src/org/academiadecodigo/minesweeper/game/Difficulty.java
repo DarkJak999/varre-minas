@@ -1,4 +1,4 @@
-package org.academiadecodigo.minesweeper;
+package org.academiadecodigo.minesweeper.game;
 
 /**
  * Created by codecadet on 14/11/16.

@@ -1,8 +1,5 @@
 package org.academiadecodigo.minesweeper.game;
 
-import org.academiadecodigo.minesweeper.Difficulty;
-
-import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -60,7 +57,6 @@ public class GameEngine {
         }
 
         System.out.println("Game Over");
-
     }
 
     /**
@@ -92,8 +88,6 @@ public class GameEngine {
         gameMatrix = new int[gridRows + 2][gridCols + 2];
         expanded = new boolean[gridRows + 2][gridCols + 2];
         bombBlown = false;
-
-
     }
 
     /**
@@ -283,7 +277,6 @@ public class GameEngine {
         }
 
     }
-
 
     /**
      * This expands the cell selected and the cells right next to it until they bump into a number
