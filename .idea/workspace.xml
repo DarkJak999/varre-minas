@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ab34559a-d5c2-4952-9d83-c56869f0fd44" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/MineSweeper/org/academiadecodigo/minesweeper/game/GameEngine$1.class" afterPath="$PROJECT_DIR$/out/production/MineSweeper/org/academiadecodigo/minesweeper/game/GameEngine$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/MineSweeper/org/academiadecodigo/minesweeper/game/GameEngine.class" afterPath="$PROJECT_DIR$/out/production/MineSweeper/org/academiadecodigo/minesweeper/game/GameEngine.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/academiadecodigo/minesweeper/game/GameEngine.java" afterPath="$PROJECT_DIR$/src/org/academiadecodigo/minesweeper/game/GameEngine.java" />
     </list>
     <ignored path="MineSweeper.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -58,11 +55,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GameEngine.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="GameEngine.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/org/academiadecodigo/minesweeper/game/GameEngine.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="619">
-              <caret line="320" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="320" selection-end-column="0" />
+            <state relative-caret-position="210">
+              <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -70,7 +67,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Difficulty.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Difficulty.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/org/academiadecodigo/minesweeper/Difficulty.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="75">
@@ -163,7 +160,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
@@ -225,6 +221,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -673,6 +670,9 @@
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
   </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="ab34559a-d5c2-4952-9d83-c56869f0fd44" name="Default" comment="" />
@@ -682,12 +682,13 @@
       <updated>1479143518026</updated>
       <workItem from="1479143522635" duration="13575000" />
       <workItem from="1479233584099" duration="13862000" />
-      <workItem from="1479317341592" duration="3332000" />
+      <workItem from="1479317341592" duration="7354000" />
+      <workItem from="1479411336685" duration="422000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="30769000" />
+    <option name="totallyTimeSpent" value="35213000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1080" extended-state="0" />
@@ -720,6 +721,14 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+      <collection />
+    </option>
+  </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
@@ -734,6 +743,64 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/org/academiadecodigo/minesweeper/Server.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="19" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/academiadecodigo/minesweeper/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/academiadecodigo/minesweeper/ClientMirror.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="25" selection-start-line="5" selection-start-column="25" selection-end-line="5" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/academiadecodigo/minesweeper/game/GameEngine.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/academiadecodigo/minesweeper/Difficulty.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/academiadecodigo/minesweeper/game/GameTests.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/academiadecodigo/minesweeper/game/Bomb.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/org/academiadecodigo/minesweeper/Server.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -866,18 +933,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/academiadecodigo/minesweeper/ClientMirror.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="25" selection-start-line="5" selection-start-column="25" selection-end-line="5" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/org/academiadecodigo/minesweeper/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/academiadecodigo/minesweeper/Difficulty.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/academiadecodigo/minesweeper/ClientMirror.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="25" selection-start-line="5" selection-start-column="25" selection-end-line="5" selection-end-column="25" />
           <folding />
         </state>
       </provider>
@@ -892,19 +967,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/org/academiadecodigo/minesweeper/game/GameEngine.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="619">
-          <caret line="320" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="320" selection-end-column="0" />
+        <state relative-caret-position="210">
+          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/academiadecodigo/minesweeper/Difficulty.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>

@@ -9,7 +9,6 @@ public class GameEngine {
 
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_RED = "\u001B[31m";
-    public static final String ANSI_YELLOW = "\u001B[33m";
 
     private static final int PROB = 90;
     private int gridRows;
@@ -189,9 +188,9 @@ public class GameEngine {
             System.out.print(" " + r + " ");
             for (int c = 1; c <= gridCols; c++) {
                 if (gameMatrix[r][c] == 0 && expanded[r][c])
-                    System.out.print("[" +ANSI_YELLOW + "e" + ANSI_RESET + "]");
+                    System.out.print("[" + colorPicker(gameMatrix[r][c]) + "e" + ANSI_RESET + "]");
                 else if (gameMatrix[r][c] > 0 && expanded[r][c])
-                    System.out.print("[" + gameMatrix[r][c] + "]");
+                    System.out.print("[" + colorPicker(gameMatrix[r][c]) + gameMatrix[r][c] + ANSI_RESET + "]");
                 else if (gameMatrix[r][c] == -1 && expanded[r][c])
                     System.out.print(ANSI_RED + "[*]" + ANSI_RESET);
                 else
@@ -201,6 +200,36 @@ public class GameEngine {
         }
     }
 
+    /**
+     *
+     */
+    public String colorPicker(int value){
+
+        switch (value){
+            case 1:
+                return "\u001B[34m";
+            case 2:
+                return "\u001B[32m";
+            case 3:
+                return "\u001B[31m";
+            case 4:
+                return "\u001B[35m";
+            case 5:
+                return "\u001B[34m";
+            case 6:
+                return "\u001B[36m";
+            case 7:
+                return "\u001B[30m";
+            case 8:
+                return "\u001B[37m";
+            case 0:
+                return "\u001B[33m";
+            default:
+                System.out.println("something went very wrong");
+                break;
+        }
+        return "\u001B[0m";
+    }
 
     /**
      * Empties the game matrix with all the cells with the value 0 in order use the matrix in another match
