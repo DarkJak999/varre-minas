@@ -1,4 +1,4 @@
-package org.academiadecodigo.minesweeper.connection;
+package org.academiadecodigo.minesweeper.client;
 
 import com.sun.xml.internal.bind.v2.TODO;
 
@@ -18,7 +18,6 @@ public class Player {
     private String hostName;
     private int portNumber;
     private Scanner keyboardInput;
-    private ExecutorService pool = Executors.newFixedThreadPool(2);
 
     public Player(String hostName, int portNumber) {
 
@@ -30,14 +29,20 @@ public class Player {
     public void start() {
 
        keyboardInput = new Scanner(System.in);
+        String playerMessage;
 
         try {
             clientSocket = new Socket(hostName, portNumber);
             output = new DataOutputStream(clientSocket.getOutputStream());
             Thread thread = new Thread(new Reader());
             thread.start();
-            pool.submit(thread);
-            //TODO IMPLEMENTAR ISCONNECTED
+
+            while (!clientSocket.isClosed()){
+                playerMessage = keyboardInput.nextLine();
+                output.write(playerMessage.getBytes());
+                output.write("\n".getBytes());
+                output.flush();
+            }
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -45,6 +50,8 @@ public class Player {
     }
 
     private class Reader implements Runnable {
+
+        private String playerMessage2;
 
         private BufferedReader input;
 
@@ -62,14 +69,14 @@ public class Player {
             while (!clientSocket.isClosed()){
 
                 try {
-                    String message = input.readLine();
+                    playerMessage2 = input.readLine();
 
-                    if (message == null) {
+                    if (playerMessage2 == null) {
                         clientSocket.close();
                         return;
                     }
 
-                    System.out.println(message);
+                    System.out.println(playerMessage2);
 
                 } catch (IOException e) {
                     e.printStackTrace();

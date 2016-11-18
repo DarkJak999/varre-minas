@@ -17,6 +17,7 @@ public class GameEngine {
     private boolean bombBlown;
     private int[][] gameMatrix;
     private boolean[][] expanded;
+    private String[][] representableMatrix;
 
 
     /**
@@ -56,6 +57,7 @@ public class GameEngine {
         }
 
         System.out.println("Game Over");
+
     }
 
     /**
@@ -87,6 +89,8 @@ public class GameEngine {
         gameMatrix = new int[gridRows + 2][gridCols + 2];
         expanded = new boolean[gridRows + 2][gridCols + 2];
         bombBlown = false;
+
+
     }
 
     /**
@@ -187,14 +191,22 @@ public class GameEngine {
         for (int r = 1; r <= gridRows; r++) {
             System.out.print(" " + r + " ");
             for (int c = 1; c <= gridCols; c++) {
-                if (gameMatrix[r][c] == 0 && expanded[r][c])
-                    System.out.print("[" + colorPicker(gameMatrix[r][c]) + "e" + ANSI_RESET + "]");
-                else if (gameMatrix[r][c] > 0 && expanded[r][c])
-                    System.out.print("[" + colorPicker(gameMatrix[r][c]) + gameMatrix[r][c] + ANSI_RESET + "]");
-                else if (gameMatrix[r][c] == -1 && expanded[r][c])
-                    System.out.print(ANSI_RED + "[*]" + ANSI_RESET);
-                else
+                if (gameMatrix[r][c] == 0 && expanded[r][c]) {
+                    representableMatrix[r][c] = "[" + colorPicker(gameMatrix[r][c]) + "e" + ANSI_RESET + "]";
+                    System.out.print(representableMatrix[r][c]);
+                }
+                else if (gameMatrix[r][c] > 0 && expanded[r][c]) {
+                    representableMatrix[r][c] = "[" + colorPicker(gameMatrix[r][c]) + gameMatrix[r][c] + ANSI_RESET + "]";
+                    System.out.print(representableMatrix[r][c]);
+                }
+                else if (gameMatrix[r][c] == -1 && expanded[r][c]) {
+                    representableMatrix[r][c] = ANSI_RED + "[*]" + ANSI_RESET;
+                    System.out.print(representableMatrix[r][c]);
+                }
+                else {
+                    representableMatrix[r][c] = "[ ]";
                     System.out.print("[ ]");
+                }
             }
             System.out.println();
         }
@@ -307,6 +319,7 @@ public class GameEngine {
 
     }
 
+
     /**
      * This expands the cell selected and the cells right next to it until they bump into a number
      *
@@ -337,6 +350,10 @@ public class GameEngine {
                 for (int cc = col - 1; cc <= col + 1; cc++)
                     expandCell(rr, cc);
         }
+    }
+
+    public String[][] getRepresentableMatrix() {
+        return representableMatrix;
     }
 }
 
