@@ -8,7 +8,11 @@ import org.academiadecodigo.minesweeper.game.GameEngine;
 public class GameTests {
 
     public static void main(String[] args) {
-        GameEngine g = new GameEngine();
+        /*GameEngine g = new GameEngine();
+
+        g.start();*/
+
+        GameEngineMultiplayer g = new GameEngineMultiplayer();
 
         g.start();
     }
