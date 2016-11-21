@@ -6,15 +6,16 @@ import java.net.Socket;
 /**
  * Created by codecadet on 14/11/16.
  */
+
+/**
+ * Class that works as an extension of server and establishes communications with the client.
+ */
 public class ClientMirror implements Runnable {
 
     private Server server;
     private Socket clientSocket;
     private DataOutputStream output;
-    private BufferedOutputStream output2;
     private BufferedReader input;
-    private String username;
-    private boolean gameMode;
 
     public ClientMirror(Server server, Socket clientSocket) throws IOException {
         this.server = server;
@@ -26,42 +27,22 @@ public class ClientMirror implements Runnable {
 
         try {
             output = new DataOutputStream(clientSocket.getOutputStream());
-            //output2 = new BufferedOutputStream(new DataOutputStream(clientSocket.getOutputStream()));
             input = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             gameTitle();
-            setUsername();
-            gameOn();
-
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        String clientMessage = "";
-
-        while (!clientSocket.isClosed()) {
-            try {
-                clientMessage = input.readLine();
-
-                if (clientMessage == null) {
-                    server.exitGame(username);
-                    clientSocket.close();
-                } else {
-                    if (!gameMode){
-                        server.broadcast(clientMessage);
-                    } else {
-                        //método que recebe clientMessage e devolve array bytes da matrix actualizada (GameEngine.getRepresentableMatrix())
-                        server.broadcastMatrix(clientMessage.getBytes());
-                    }
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
     }
-    public void gameTitle () {
 
-       String title = "____   ____                                _____  .__                         \n" +
+    /**
+     * That's fucking amazing!!! And it's the most important method in our game!
+     * or
+     * Opening message when clients establish connection with server.
+     */
+    public void gameTitle() {
+
+        String title = "____   ____                                _____  .__                         \n" +
                 "\\   \\ /   /____ ______________   ____     /     \\ |__| ____ _____    ______   \n" +
                 " \\   Y   /\\__  \\\\_  __ \\_  __ \\_/ __ \\   /  \\ /  \\|  |/    \\\\__  \\  /  ___/   \n" +
                 "  \\     /  / __ \\|  | \\/|  | \\/\\  ___/  /    Y    \\  |   |  \\/ __ \\_\\___ \\    \n" +
@@ -88,48 +69,12 @@ public class ClientMirror implements Runnable {
         }
     }
 
-    public void setUsername() {
-
-        String getUsername = "Welcome my brave friend! Let's play a GAME! But first...TELL ME YOUR NAME!!! ";
-
-        try {
-            output.write(getUsername.getBytes());
-            output.write("\n".getBytes());
-            output.flush();
-            Thread.currentThread().setName(input.readLine());
-            username = Thread.currentThread().getName();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void gameOn() {
-
-        String confirmGame = username + ", are you ready to find a whole lot of bombs?(yes/no)";
-        String answer = "";
-
-        try {
-            output.write(confirmGame.getBytes());
-            output.write("\n".getBytes());
-            output.flush();
-            answer = input.readLine();
-            System.out.println(answer);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-       if (answer.equals("yes")) {
-           System.out.println("entrei aqui");
-           gameMode = true;
-        } else {
-           System.out.println("fiz borrada");
-           gameMode=false;
-        }
-    }
-
-    public void sendMessage(String message) {
+    /**
+     * Method that forward the server output to the client connected to this mirror.
+     *
+     * @param message
+     */
+    public synchronized void sendMessage(String message) {
 
         try {
             output.write(message.getBytes());
@@ -140,22 +85,7 @@ public class ClientMirror implements Runnable {
         }
     }
 
-
-    public void sendMatrix(byte[] matrixLine){
-        try {
-            output.write(matrixLine);
-            output.write("\n".getBytes());
-            output.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public boolean isGameMode() {
-        return gameMode;
+    public synchronized BufferedReader getInput() {
+        return input;
     }
 }
